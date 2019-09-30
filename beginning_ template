@@ -1,0 +1,63 @@
+#include<cmath> 
+#include<iostream>
+#include<vector> 
+using namespace std; 
+
+class client{ 
+ public: 
+ 
+ double initial_investment = 100000;
+ double fee_exp            = .015;
+ 
+ double p_equity            =0;
+ double p_bonds             =0; 
+ double p_cash              =0; 
+ double p_em                =0; 
+ 
+ 
+ double fee();
+ double capital();
+ 
+ void aggressive();
+ void moderate();
+ void conservative();
+ 
+ 
+ 
+ 
+ 
+};
+
+double client :: fee(){return fee_exp*initial_investment;} 
+
+double client :: capital(){
+    double capital = initial_investment - fee(); 
+    return capital;
+}
+
+void client :: aggressive(){
+    p_equity = .57;
+    p_bonds  = .05; 
+    p_cash   =  0; 
+    p_em     = .38;      
+}
+
+void client :: moderate(){
+    p_equity =  .36;
+    p_bonds  =  .35; 
+    p_cash   =  0.05; 
+    p_em     = .24;      
+}
+
+void client :: conservative(){
+    p_equity = .13;
+    p_bonds  = .68; 
+    p_cash   = .12; 
+    p_em     = .07;      
+}
+
+int main(){
+    
+    client x;
+    return 0;   
+}
