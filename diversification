@@ -33,6 +33,8 @@ class client{
  void set_cash(double x);
  void set_em(double x); 
  
+ void print();
+ 
 };
 
 double client :: fee(){return fee_exp*initial_investment;} 
@@ -97,8 +99,38 @@ void client :: set_em(double x){
     em = x*capital();      
 }
 
+void client:: print() {
+    
+    cout<<"Capital Invested: "<<capital()<<"\n";
+    
+    aggressive();
+    cout<<"Aggressive Allocation: \n";
+    cout<<"Equity: "<<equity<<"\n";
+    cout<<"Bonds: "<<bonds<<"\n";
+    cout<<"Emerging Markets: "<<em<<"\n";
+    cout<<"Cash: "<<cash<<"\n"; 
+    
+    moderate();
+    cout<<"Moderate Allocation: \n";
+    cout<<"Equity: "<<equity<<"\n";
+    cout<<"Bonds: "<<bonds<<"\n";
+    cout<<"Emerging Markets: "<<em<<"\n";
+    cout<<"Cash: "<<cash<<"\n"; 
+    
+    conservative();
+    cout<<"Conservative Allocation: \n";
+    cout<<"Equity: "<<equity<<"\n";
+    cout<<"Bonds: "<<bonds<<"\n";
+    cout<<"Emerging Markets: "<<em<<"\n";
+    cout<<"Cash: "<<cash<<"\n"; 
+}
+    
+
+
+
 int main(){
     
     client x;
+    x.print();
     return 0;   
 }
