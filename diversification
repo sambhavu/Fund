@@ -103,12 +103,16 @@ void client:: print() {
     
     cout<<"Capital Invested: "<<capital()<<"\n";
     
+    cout<<"\n";
+    
     aggressive();
     cout<<"Aggressive Allocation: \n";
     cout<<"Equity: "<<equity<<"\n";
     cout<<"Bonds: "<<bonds<<"\n";
     cout<<"Emerging Markets: "<<em<<"\n";
     cout<<"Cash: "<<cash<<"\n"; 
+    
+    cout<<"\n";
     
     moderate();
     cout<<"Moderate Allocation: \n";
@@ -117,12 +121,16 @@ void client:: print() {
     cout<<"Emerging Markets: "<<em<<"\n";
     cout<<"Cash: "<<cash<<"\n"; 
     
+    cout<<"\n";
+    
     conservative();
     cout<<"Conservative Allocation: \n";
     cout<<"Equity: "<<equity<<"\n";
     cout<<"Bonds: "<<bonds<<"\n";
     cout<<"Emerging Markets: "<<em<<"\n";
     cout<<"Cash: "<<cash<<"\n"; 
+    
+    cout<<"\n";
 }
     
 
