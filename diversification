@@ -82,6 +82,7 @@ void client :: conservative(){
 
 void client :: set_equity(double x){ 
     equity = x*capital();
+    
 }
 
 void client :: set_bonds(double x){
@@ -93,7 +94,7 @@ void client :: set_cash(double x){
 }
 
 void client :: set_em(double x){ 
-    em = x*capital();   
+    em = x*capital();      
 }
 
 int main(){
