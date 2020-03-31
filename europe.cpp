@@ -15,7 +15,7 @@ void showEurope(double capital);
 
 void fund::showEurope(double capital) 
 {
-   std::cout<<"Fund Capital: Europe: "<<capital<<"/n";
+   std::cout<<"Fund Capital: Europe: "<<capital<<"\n";
 }
 
 void fund::Europe(){ 
