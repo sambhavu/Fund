@@ -708,6 +708,9 @@ class trade{
         vector<vector<double>> buy(); 
         vector<vector<double>> sell(); 
 
+        vector<int> buy_times;
+        vector<int> sell_times; 
+
         double buy_count;
         double sell_count; 
 
@@ -722,6 +725,8 @@ enter_buy::trade(int t, int b){
 double val=EURUSD[t];
 
 buy[b][0]=val; 
+buy_times.push_back(t);
+
 
 }
 
@@ -730,6 +735,7 @@ enter_sell::trade(int t, int s){
 double val=EURUSD[t]; 
 
 sell[s][0]=val;
+sell_times.push_back(t);
 
 } 
 
