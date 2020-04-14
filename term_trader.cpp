@@ -705,8 +705,8 @@ class trade{
         double sell(int t); 
         
 
-        vector<vector<double>> buy[][]; 
-        vector<vector<double>> sell[][]; 
+        vector<vector<double>> buy(); 
+        vector<vector<double>> sell(); 
 
         double buy_count;
         double sell_count; 
@@ -721,17 +721,53 @@ enter_buy::trade(int t, int b){
 
 double val=EURUSD[t];
 
-buy[b][val];
-
+buy[b][0]=val; 
 
 }
 
+enter_sell::trade(int t, int s){
+
+double val=EURUSD[t]; 
+
+sell[s][0]=val;
+
+} 
+
+double close_buy::trade(int t, int b){ 
+
+double enter_price = buy[b][0]; 
+double close_price = EURUSD[t]; 
+
+double p = close_price-enter_price; 
+
+return p;
+
+} 
+
+double close_sell::trade(int t, int s){ 
+
+double enter_price=sell[s][0]; 
+double close_price=EURUSD[t]; 
+
+double p=close_price-enter_price; 
+
+return p; 
+
+} 
+
 double buy:: trade(int t){ 
 
-for(int i=0; i<=t; i++) { 
-//do you want to buy and today
-//do you want to close positions today
+//close all positions at end 
+double p=0;
+if(t==679){
 
+       for(int i=1; i<=buy_count; i++) { 
+       //do you want to close positions today
+       p+=close_buy(t,i);
+
+}
+
+//do you want to buy positions today
 
 if(t==1){ 
     buy_count=1; 
@@ -739,22 +775,45 @@ if(t==1){
     buycount++;
 } 
 
+if(EURUSD[t-1]-EURUSD[t-2]>0){ 
+    enter_buy(t,buy_count);
+    buy_count++;
+} 
+
+return p; 
 
 } 
 
 
-} 
+dounle sell::trade(int t){ 
+sell_count=1;
+double p=0;
+
+if{t==679){
+
+    for(int i=1;i<=sell_count;i++){
+          p+=close_sell(t,i);
+    }
+
+
+if(EURUSD[t-1]-EURUSD[t-2]<0){
+    enter_sell(t,sell_count);
+    sell_count++;
+}
+
+
+}
 
 
 int main(){
 
     trader fx;
-    double p;
+    double profit=0;
 
       for(int i=1; i<=697; ++i){
            today=i; 
-           p+= buy(today);
-           p+= sell(today);
+           profit = fx.buy(today);
+           profit = fx.sell(today);
 
        }
 	
