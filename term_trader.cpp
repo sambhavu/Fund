@@ -696,10 +696,10 @@ class trade{
 	public:
        
         enter_buy(int t, int b);
-        double close_buy(int t, int b);
+        double close_buy(int b);
  
         enter_sell(int t, int s);
-        double close_sell(int t, int s); 
+        double close_sell(int s); 
 
         double buy(int t);
         double sell(int t); 
@@ -707,9 +707,6 @@ class trade{
 
         vector<vector<double>> buy(); 
         vector<vector<double>> sell(); 
-
-        vector<int> buy_times;
-        vector<int> sell_times; 
 
         double buy_count;
         double sell_count; 
@@ -721,21 +718,51 @@ class trade{
 };
 
 enter_buy::trade(int t, int b){ 
+//0-b
+//0-t
+//1-buyvalue
+//openclose 
+//3-volume
 
 double val=EURUSD[t];
 
-buy[b][0]=val; 
-buy_times.push_back(t);
+vector<double> trade;
+
+trade[0]=b;
+trade[1]=t;
+trade[2]=val;
+trade[3]=1.0; //1 for open, 0 for close
+trade[4]= 10000;  //const volume 10000 units 
 
 
+
+
+buy.push_back(trade);
+trade.clear(); 
 }
 
 enter_sell::trade(int t, int s){
+//0-s
+//0-t
+//1-buyvalue
+//openclose 
+//3-volume
 
-double val=EURUSD[t]; 
+double val=EURUSD[t];
 
-sell[s][0]=val;
-sell_times.push_back(t);
+vector<double> trade;
+
+trade[0]=s;
+trade[1]=t;
+trade[2]=val;
+trade[3]=1.0; //1 for open, 0 for close
+trade[4]= 10000; //const volume 10000 units 
+
+
+
+
+sell.push_back(trade);
+trade.clear(); 
 
 } 
 
@@ -791,7 +818,7 @@ return p;
 } 
 
 
-dounle sell::trade(int t){ 
+double sell::trade(int t){ 
 sell_count=1;
 double p=0;
 
