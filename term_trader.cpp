@@ -766,25 +766,48 @@ trade.clear();
 
 } 
 
-double close_buy::trade(int t, int b){ 
+double close_buy::trade(int b){ 
 
-double enter_price = buy[b][0]; 
+if(buy[b][3]==0){
+       cout<<"Error, No position Open";
+}
+
+else{
+
+int t=buy[b][1];
+double enter_price = buy[b][2]; 
 double close_price = EURUSD[t]; 
+double vol=buy[b][4];
 
-double p = close_price-enter_price; 
+double p =(close_price-enter_price)*vol;
+
+buy[b][3]=0;
 
 return p;
+}
 
 } 
 
-double close_sell::trade(int t, int s){ 
+double close_sell::trade(int s){ 
 
-double enter_price=sell[s][0]; 
-double close_price=EURUSD[t]; 
+if(sell[s][3]==0){
+       cout<<"Error, No position Open";
+}
 
-double p=close_price-enter_price; 
+else{
 
-return p; 
+int t=sell[s][1];
+double enter_price = sell[s][2]; 
+double close_price = EURUSD[t]; 
+double vol=sell[s][4];
+
+double p =(close_price-enter_price)*vol;
+
+sell[b][3]=0;
+
+return p;
+}
+
 
 } 
 
@@ -796,14 +819,14 @@ if(t==679){
 
        for(int i=1; i<=buy_count; i++) { 
        //do you want to close positions today
-       p+=close_buy(t,i);
+       p+=close_buy(i);
 
 }
 
 //do you want to buy positions today
 
 if(t==1){ 
-    buy_count=1; 
+    buy_count=0; 
     enter_buy(t,buy_count)
     buycount++;
 } 
@@ -819,13 +842,13 @@ return p;
 
 
 double sell::trade(int t){ 
-sell_count=1;
+sell_count=0;
 double p=0;
 
 if{t==679){
 
     for(int i=1;i<=sell_count;i++){
-          p+=close_sell(t,i);
+          p+=close_sell(i);
     }
 
 
