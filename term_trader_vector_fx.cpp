@@ -1426,28 +1426,35 @@ class algortrade{
        int today;
        int tradeid;
 
-       void algotrade();
+       vector<double> FEED(200); 
+
+       void algotrade(vector<double> data);
        void trade(int x);
        void enter_buy(int t);
        void close_buy(int id, int t); 
 
-       vector<int> ifopen;
-       vector<int> entertime; 
+       vector<int> ifopen(200);
+       vector<int> entertime(200);
 
-       vector<double> entervalue;
-       vector<double> volume;
+       vector<double> entervalue(200);
+       vector<double> volume(200);
 
-       vector<int> closetime
-       vector<doube> closevalue; 
-       vector<double> profit; 
+       vector<int> closetime(200);
+       vector<doube> closevalue(200);
+       vector<double> profit(200);
 
 
      
 
-} 
+};
 
-void algotrade::algotrade(){
+void algotrade::algotrade(vector<double> data){
+
+   for(int i=0;i<=200;i++)
+         FEED[0] = data[0];
+
      tradeid=0;
+
 }
 
 
@@ -1455,7 +1462,9 @@ void algotrade::trade(int x)
 {
 today=x;
 
-//buyconditions example
+cont double ERROR= .00006;
+
+
 if(FEED[today]-FEED[today-1]<0)
 {
    enter_buy(today);
@@ -1476,6 +1485,45 @@ for(int i=0;i<=tradeid; i++)
 }
 
 
+void algotrade::enter_buy(int t)
+{
+       value=FEED[t];
+   
+       ifopen[tradeid]=1.0;
+       entertime[tradeid] = t;
+
+       entervalue[tradeid]=value;
+       volume[tradeid]=10000;
+
+       tradeid++;
+
+}
+
+void algotrade::close_buy(int id, int t)
+{
+
+       int check=ifopen[id];
+
+       if(check){
+            int enter_t;
+            double enter_v;
+            double close_v;
+            double v;
+
+            enter_t=entertime[id];
+            enter_v=entervalue[id];
+            v=volume[id];
+            closetime[id]=t;
+            close_v=FEED[t];
+            closevalue[id]=close_v;
+
+            double p; 
+            p=(close_v-enter_v)*v;
+            profit[id]=p; 
+
+
+}
+
 
 
 
@@ -1483,11 +1531,18 @@ int main()
 {
 
 const int SIZE = 200;
+vector<double> feed(200);
 
-algotrade u;
+for(int f=0; f<=200; f++)
+    feed[f]=GBPUSD[f];
 
-for(int i=1;i<=SIZE; i++)
-     u.trade(i);
+algotrade cable(feed);
+
+for(int i=1;i<=200; i++)
+{
+     cable.trade(i);
+}
+
 
 return 0;
 }
