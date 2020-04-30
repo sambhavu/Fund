@@ -1432,6 +1432,8 @@ class algotrade{
        void enter_buy(int t);
        void close_buy(int id, int t); 
 
+       double get_profit(); 
+
        vector<int> ifopen;
        vector<int> entertime;
        vector<double> entervalue;
@@ -1460,6 +1462,18 @@ algotrade::algotrade(){
         tradeid=0;
 
 }
+
+double algotrade::get_profit()
+{ 
+    int j;
+    j=profit.size();
+   double totalprofit=0;
+   for(int i=0; i<=j; i++)
+        totalprofit+=profit[i];
+
+return totalprofit;
+
+} 
 
 
 void algotrade::trade(int x)
@@ -1544,9 +1558,7 @@ void algotrade::close_buy(int id, int t)
             double p; 
             p=(close_v-enter_v)*v;
             profit[id]=p; 
-       }
-
-
+     } 
 
 }
 
@@ -1560,10 +1572,16 @@ const int SIZE = 200;
 
 algotrade cable;
 
-for(int i=1;i<=200; i++)
+for(int i=1;i<=SIZE; i++)
 {
      cable.trade(i);
 }
+
+double profit;
+profit=cable.get_profit();
+cout<<"Profit: "<<profit<<"\n";
+cout<<"Volume: 1000\n";
+cout<<"Average gain per trade: "<<profit/1000;
 
 
 return 0;
