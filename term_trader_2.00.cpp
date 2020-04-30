@@ -693,16 +693,17 @@ const double EURUSD[679] = {
 };
 
 class trade{
-	public:
+
+    public:
        
-        enter_buy(int t, int b);
+        void enter_buy(int t, int b);
         double close_buy(int b);
  
-        enter_sell(int t, int s);
+        void enter_sell(int t, int s);
         double close_sell(int s); 
 
-        double buy(int t);
-        double sell(int t); 
+        void buy(int t);
+        void sell(int t); 
         
 
         vector<vector<double>> buy(); 
@@ -712,12 +713,13 @@ class trade{
         double sell_count; 
 
         double profit;
-        double total_profit; 
-
-
 };
 
-enter_buy::trade(int t, int b){ 
+
+
+
+
+void trade::enter_buy(int t, int b){ 
 //0-b
 //0-t
 //1-buyvalue
@@ -741,7 +743,7 @@ buy.push_back(trade);
 trade.clear(); 
 }
 
-enter_sell::trade(int t, int s){
+void trade::enter_sell(int t, int s){
 //0-s
 //0-t
 //1-buyvalue
@@ -766,7 +768,7 @@ trade.clear();
 
 } 
 
-double close_buy::trade(int b){ 
+double trade::close_buy(int b){ 
 
 if(buy[b][3]==0){
        cout<<"Error, No position Open";
@@ -788,7 +790,7 @@ return p;
 
 } 
 
-double close_sell::trade(int s){ 
+double trade::close_sell(int s){ 
 
 if(sell[s][3]==0){
        cout<<"Error, No position Open";
@@ -811,10 +813,11 @@ return p;
 
 } 
 
-double buy:: trade(int t){ 
+void trade::buy(int t){ 
 
 //close all positions at end 
 double p=0;
+
 if(t==679){
 
        for(int i=1; i<=buy_count; i++) { 
@@ -835,13 +838,11 @@ if(EURUSD[t-1]-EURUSD[t-2]>0){
     enter_buy(t,buy_count);
     buy_count++;
 } 
-
-return p; 
-
+p+=profit;
 } 
 
 
-double sell::trade(int t){ 
+void trade::sell(int t){ 
 sell_count=0;
 double p=0;
 
@@ -857,6 +858,7 @@ if(EURUSD[t-1]-EURUSD[t-2]<0){
     sell_count++;
 }
 
+p+=profit;
 
 }
 
@@ -868,10 +870,11 @@ int main(){
 
       for(int i=1; i<=697; ++i){
            today=i; 
-           profit = fx.buy(today);
-           profit = fx.sell(today);
+           fx.buy(today);
+           fx.sell(today);
 
        }
+       cout<<fx.profit();
 	
        return 0;
      
