@@ -1425,6 +1425,7 @@ class algotrade{
        
        int today;
        int tradeid;
+       int profitsize;
 
 
        algotrade();
@@ -1466,10 +1467,13 @@ algotrade::algotrade(){
 double algotrade::get_profit()
 { 
     int j;
+    profitsize=j;
     j=profit.size();
    double totalprofit=0;
    for(int i=0; i<=j; i++)
-        totalprofit+=profit[i];
+   {
+        totalprofit+=profit[i]; 
+   }
 
 return totalprofit;
 
@@ -1508,7 +1512,7 @@ for(int i=0;i<=tradeid; i++)
 
        if(GBPUSD[today]-GBPUSD[today-1]<EXIT)
        {
-             close_buy(tradeid, today);
+             close_buy(i, today);
        }
 
 
@@ -1543,13 +1547,12 @@ void algotrade::close_buy(int id, int t)
        int check=ifopen[id];
 
        if(check){
-            int enter_t;
+            
             double enter_v;
             double close_v;
             double v;
 
-            enter_t=entertime[id];
-            enter_v=entervalue[enter_t];
+            enter_v=entervalue[id];
             v=volume[id];
             closetime[id]=t;
             close_v=GBPUSD[t];
@@ -1558,6 +1561,8 @@ void algotrade::close_buy(int id, int t)
             double p; 
             p=(close_v-enter_v)*v;
             profit[id]=p; 
+           
+           ifopen[id]=0;
      } 
 
 }
@@ -1579,6 +1584,9 @@ for(int i=1;i<=SIZE; i++)
 
 double profit;
 profit=cable.get_profit();
+for(int k=0; k<=cable.profitsize; k++) 
+        cout<<cable.profit[k]<<"\n"; 
+
 cout<<"Profit: "<<profit<<"\n";
 cout<<"Volume: 1000\n";
 cout<<"Average gain per trade: "<<profit/1000;
