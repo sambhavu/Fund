@@ -1432,15 +1432,13 @@ class algotrade{
        void enter_buy(int t);
        void close_buy(int id, int t); 
 
-       vector<int> ifopen[200];
-       vector<int> entertime[200];
-
-       vector<double> entervalue[200];
-       vector<double> volume[200];
-
-       vector<int> closetime[200];
-       vector<double> closevalue[200];
-       vector<double> profit[200];
+       vector<int> ifopen;
+       vector<int> entertime;
+       vector<double> entervalue;
+       vector<double> volume;
+       vector<int> closetime;
+       vector<double> closevalue;
+       vector<double> profit;
 
 
      
@@ -1449,7 +1447,17 @@ class algotrade{
 
 algotrade::algotrade(){
 
-     tradeid=0;
+
+
+       ifopen.resize(200);
+       entertime.resize(200);
+       entervalue.resize(200);
+       volume.resize(200);
+       closetime.resize(200);
+        closevalue.resize(200);
+        profit.resize(200);
+
+        tradeid=0;
 
 }
 
@@ -1477,8 +1485,7 @@ for(int i=0;i<=tradeid; i++)
 
    if(check==1){
       
-       int t=0;
-       t=entertime[i];
+       
 /*
        for(int j=t;j<=today;j++)
            tradepath.push_backj]); 
@@ -1487,7 +1494,7 @@ for(int i=0;i<=tradeid; i++)
 
        if(GBPUSD[today]-GBPUSD[today-1]<EXIT)
        {
-             close_buy(int tradeid, int today);
+             close_buy(tradeid, today);
        }
 
 
@@ -1503,6 +1510,7 @@ for(int i=0;i<=tradeid; i++)
 
 void algotrade::enter_buy(int t)
 {
+      double value;
        value=GBPUSD[t];
    
        ifopen[tradeid]=1.0;
@@ -1527,7 +1535,7 @@ void algotrade::close_buy(int id, int t)
             double v;
 
             enter_t=entertime[id];
-            enter_v=entervalue[id];
+            enter_v=entervalue[enter_t];
             v=volume[id];
             closetime[id]=t;
             close_v=GBPUSD[t];
