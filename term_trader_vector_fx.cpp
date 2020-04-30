@@ -1544,6 +1544,8 @@ void algotrade::close_buy(int id, int t)
             double p; 
             p=(close_v-enter_v)*v;
             profit[id]=p; 
+       }
+
 
 
 }
