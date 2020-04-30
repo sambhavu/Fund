@@ -1460,12 +1460,15 @@ void algotrade::algotrade(vector<double> data){
 
 void algotrade::trade(int x)
 {
+
 today=x;
 
-cont double ERROR= .00006;
+cont double ERROR= -.00005;
+const double EXIT= -.002;
 
+vector<double> tradepath;
 
-if(FEED[today]-FEED[today-1]<0)
+if(FEED[today]-FEED[today-1]<ERROR)
 {
    enter_buy(today);
 }
@@ -1473,13 +1476,27 @@ if(FEED[today]-FEED[today-1]<0)
 
 for(int i=0;i<=tradeid; i++)
 {
-   if(ifopen(i)==1){
-      //enter conditions
-       close_buy(int tradeid, int today);
+   if(ifopen[i]==1){
+      
+       int t=0;
+       t=entertime[i];
+/*
+       for(int j=t;j<=today;j++)
+           tradepath.push_back(FEED[j]); 
+      
+*/       
+
+       if(FEED[today]-FEED[today-1]<EXIT)
+       {
+             close_buy(int tradeid, int today);
+       }
+
+
+
      } 
 
 
-}
+}//end of for loop 
 
 
 }
